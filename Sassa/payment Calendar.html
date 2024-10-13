@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SASSA Payment Calendar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background-color: #FFBF00;
+            color: #36454F;
+            padding: 20px 0;
+        }
+        .calendar-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .calendar-header {
+            background-color: #FFBF00;
+            color: #36454F;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .calendar-day {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            height: 100px;
+        }
+        .payment-day {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .search-container {
+            margin-bottom: 20px;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="text-center">SASSA Payment Calendar</h1>
+            <a href="landing page.html" class="btn btn-light back-button">Back to Dashboard</a>
+        </div>
+    </header>
+
+    <div class="container mt-4">
+        <div class="search-container">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search payments (YYYY-MM-DD)">
+            <button onclick="searchPayments()" class="btn btn-primary mt-2">Search</button>
+        </div>
+
+        <div class="calendar-container">
+            <div class="calendar-nav">
+                <button onclick="changeMonth(-1)" class="btn btn-secondary">&lt; Previous</button>
+                <h2 class="text-center" id="currentMonth"></h2>
+                <button onclick="changeMonth(1)" class="btn btn-secondary">Next &gt;</button>
+            </div>
+            <div class="text-center mb-3">
+                <button onclick="goToToday()" class="btn btn-info">Today</button>
+            </div>
+            <div class="row">
+                <div class="col">Sun</div>
+                <div class="col">Mon</div>
+                <div class="col">Tue</div>
+                <div class="col">Wed</div>
+                <div class="col">Thu</div>
+                <div class="col">Fri</div>
+                <div class="col">Sat</div>
+            </div>
+            <div id="calendarBody"></div>
+        </div>
+        
+        <div class="mt-4">
+            <h3>Payment Information</h3>
+            <p>SASSA payments are typically made in the first week of each month. The specific dates may vary, but generally follow this pattern:</p>
+            <ul>
+                <li>3rd: Older Persons Grants</li>
+                <li>4th: Disability Grants</li>
+                <li>5th: Children's Grants</li>
+            </ul>
+            <p>Please note that these dates are subject to change. Always check official SASSA communications for the most up-to-date information.</p>
+        </div>
+    </div>
+
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: info@sassa.gov.za</p>
+                    <p>Phone: 0800 60 10 11</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <a href="#" class="text-white mr-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white mr-3"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-white">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-white">
+            <p class="text-center mb-0">&copy; 2023 SASSA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        let currentDate = new Date();
+
+        function generateCalendar(year, month) {
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+            
+            document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+            
+            let calendarHTML = '';
+            let dayCount = 1;
+            
+            for (let i = 0; i < 6; i++) {
+                calendarHTML += '<div class="row">';
+                for (let j = 0; j < 7; j++) {
+                    if (i === 0 && j < firstDay.getDay()) {
+                        calendarHTML += '<div class="col calendar-day"></div>';
+                    } else if (dayCount > lastDay.getDate()) {
+                        calendarHTML += '<div class="col calendar-day"></div>';
+                    } else {
+                        let paymentInfo = '';
+                        if (dayCount === 3) {
+                            paymentInfo = '<br><small>Older Persons</small>';
+                        } else if (dayCount === 4) {
+                            paymentInfo = '<br><small>Disability Grants</small>';
+                        } else if (dayCount === 5) {
+                            paymentInfo = '<br><small>Children\'s Grants</small>';
+                        }
+                        calendarHTML += `<div class="col calendar-day ${paymentInfo ? 'payment-day' : ''}">${dayCount}${paymentInfo}</div>`;
+                        dayCount++;
+                    }
+                }
+                calendarHTML += '</div>';
+                if (dayCount > lastDay.getDate()) break;
+            }
+            
+            document.getElementById('calendarBody').innerHTML = calendarHTML;
+        }
+
+        function changeMonth(delta) {
+            currentDate.setMonth(currentDate.getMonth() + delta);
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+        }
+
+        function searchPayments() {
+            const searchDate = new Date(document.getElementById('searchInput').value);
+            if (!isNaN(searchDate.getTime())) {
+                currentDate = searchDate;
+                generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            } else {
+                alert('Please enter a valid date in the format YYYY-MM-DD');
+            }
+        }
+
+        function goToToday() {
+            currentDate = new Date();
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+        }
+
+        generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+    </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SASSA - User Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background-color: #FFBF00;
+            color: white;
+            padding: 20px 0;
+        }
+        .user-info {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .grant-status {
+            background-color: #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .quick-links {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .news-updates {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="text-center">Welcome to SASSA User Dashboard</h1>
+            <button class="btn btn-light logout-btn">Log Out</button>
+        </div>
+    </header>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="user-info">
+                    <h2>Personal Details</h2>
+                    <img src="https://via.placeholder.com/150" alt="User Image" class="img-fluid rounded-circle mb-3">
+                    <p><strong>Name:</strong> <span id="userName"></span></p>
+                    <p><strong>Email:</strong> <span id="userEmail"></span></p>
+                    <p><strong>ID Number:</strong> <span id="userID"></span></p>
+                </div>
+                <div class="quick-links mt-4">
+                    <h2>Quick Links</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="personal Info.html"><i class="fas fa-file-alt mr-2"></i>Update Personal Information</a></li>
+                        <li><a href="#"><i class="fas fa-envelope mr-2"></i>Contact Support</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle mr-2"></i>FAQs</a></li>
+                        <li><a href="payment Calendar.html"><i class="fas fa-calendar-alt mr-2"></i>Payment Calendar</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="grant-status">
+                    <h2>Grant Status</h2>
+                    <p><strong>Status:</strong> <span id="grantStatus">Pending</span></p>
+                    <p><strong>Grant Type:</strong> <span id="grantType">Social Relief of Distress Grant</span></p>
+                    <p><strong>Last Payment Date:</strong> <span id="lastPaymentDate">N/A</span></p>
+                    <p><strong>Next Payment Date:</strong> <span id="nextPaymentDate">TBD</span></p>
+                </div>
+                <div class="news-updates mt-4">
+                    <h2>News and Updates</h2>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Important Announcement</h5>
+                            <p class="card-text">New grant application process starting from next month. Click for more details.</p>
+                            <a href="https://www.gov.za/covid-19/individuals-and-households/social-grants-coronavirus-covid-19" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">COVID-19 Relief Fund</h5>
+                            <p class="card-text">Information about additional support during the pandemic.</p>
+                            <a href="https://www.gov.za/covid-19/individuals-and-households/social-grants-coronavirus-covid-19" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <p>Email: info@sassa.gov.za</p>
+                    <p>Phone: 0800 60 10 11</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Follow Us</h5>
+                    <a href="#" class="text-white mr-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white mr-3"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-white">Sitemap</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="bg-white">
+            <p class="text-center mb-0">&copy; 2023 SASSA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // This script would typically fetch user data from a server
+        // For demonstration, we're using placeholder data
+        document.getElementById('userName').textContent = 'John Doe';
+        document.getElementById('userEmail').textContent = 'johndoe@example.com';
+        document.getElementById('userID').textContent = '1234567890123';
+
+        // Add logout functionality
+        document.querySelector('.logout-btn').addEventListener('click', function() {
+            
+            alert('Logging out...');
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

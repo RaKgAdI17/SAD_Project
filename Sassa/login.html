@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>SASSA Login</title>
+      <link rel="stylesheet" href="style1.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+      <link href="css/responsive.css" rel="stylesheet" />
+      <style>
+         #forgotPassword {
+            color: #FFBF00;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+         }
+         #forgotPassword:hover {
+            color: #D4A017;
+            text-decoration: underline;
+         }
+         #register {
+            color: #FFBF00;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+         }
+         #register:hover {
+            color: #D4A017;
+            text-decoration: underline;
+         }
+         .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+         }
+         .submit, .cancel {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+         }
+         .submit {
+            background-color: #FFBF00;
+            color: white;
+         }
+         .submit:hover {
+            background-color: #D4A017;
+         }
+         .cancel {
+            background-color: #f44336;
+            color: white;
+         }
+         .cancel:hover {
+            background-color: #da190b;
+         }
+         #cancelButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+         }
+         #cancelButton:hover {
+            background-color: #da190b;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="container">
+         <header>SASSA Login</header>
+         <button id="cancelButton">Back</button>
+         <div class="form-outer">
+            <form action="#" id="loginForm">
+               <div class="page">
+                  <div class="title">
+                     Login Information:
+                  </div>
+                  <div class="field">
+                     <div class="label">
+                        Username or ID Number
+                     </div>
+                     <input type="text" id="username" required>
+                  </div>
+                  <div class="field">
+                     <div class="label">
+                        Password
+                     </div>
+                     <input type="password" id="password" required>
+                  </div>
+                  <div class="field button-container">
+                     <button class="submit" type="submit">Login</button>
+                  </div>
+                  <div class="field">
+                     <a href="forgot password.html" id="forgotPassword">Forgot Password?</a>
+                  </div>
+                  <div class="field">
+                     <p>Don't have an account? <a href="register.html" id="register">Register</a></p>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+      <script>
+         document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username && password) {
+               alert('Login attempt with username: ' + username);
+               
+               window.location.href = 'landing page.html';
+            } else {
+               alert('Please fill in all fields');
+            }
+         });
+
+         document.getElementById('cancelButton').addEventListener('click', function() {
+            if (confirm('Are you sure you want to GO BACK??')) {
+               window.location.href = 'index.html';
+            }
+         });
+      </script>
+   </body>
+</html>
